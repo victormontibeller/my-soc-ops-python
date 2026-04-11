@@ -1,24 +1,65 @@
 <div id="game-container">
-<div class="flex flex-col items-center justify-center min-h-full p-6 bg-gray-50">
-    <div class="text-center max-w-sm">
-        <h1 class="text-4xl font-bold text-gray-900 mb-2">Soc Ops</h1>
-        <p class="text-lg text-gray-600 mb-8">Social Bingo</p>
+<div class="sc-root">
+    <div class="sc-status-bar">
+        <span class="sc-status-dot"></span>
+        <span>SYSTEM READY</span>
+        <span class="sc-status-sep">|</span>
+        <span>NETWORK SECURE</span>
+        <span class="sc-status-sep">|</span>
+        <span>ALPHA CLEARANCE</span>
+    </div>
 
-        <div class="bg-white rounded-lg p-6 shadow-sm border border-gray-200 mb-8">
-            <h2 class="font-semibold text-gray-800 mb-3">How to play</h2>
-            <ul class="text-left text-gray-600 text-sm space-y-2">
-                <li>• Find people who match the questions</li>
-                <li>• Tap a square when you find a match</li>
-                <li>• Get 5 in a row to win!</li>
+    <div class="sc-content">
+        <div class="sc-hero">
+            <p class="sc-eyebrow">Tactical Social Network</p>
+            <h1 class="sc-title">Soc Ops</h1>
+            <p class="sc-tagline">Night Run Protocol &mdash; Active</p>
+        </div>
+
+        <div class="sc-panel sc-briefing">
+            <div class="sc-panel-header">
+                <span class="sc-panel-label">Mission Briefing</span>
+                <span class="sc-panel-badge">PRIORITY: HIGH</span>
+            </div>
+            <ul class="sc-mission-steps">
+                <li class="sc-step">
+                    <span class="sc-step-num">01</span>
+                    <span>Identify targets who match the profile cards in your tactical grid</span>
+                </li>
+                <li class="sc-step">
+                    <span class="sc-step-num">02</span>
+                    <span>Tap a node to mark each confirmed contact on your grid</span>
+                </li>
+                <li class="sc-step">
+                    <span class="sc-step-num">03</span>
+                    <span>Secure 5 in a row to complete the mission</span>
+                </li>
             </ul>
+        </div>
+
+        <div class="sc-panel sc-ops">
+            <div class="sc-ops-grid">
+                <div class="sc-stat">
+                    <span class="sc-stat-value">25</span>
+                    <span class="sc-stat-label">Grid Nodes</span>
+                </div>
+                <div class="sc-stat">
+                    <span class="sc-stat-value">5&times;5</span>
+                    <span class="sc-stat-label">Tactical Matrix</span>
+                </div>
+                <div class="sc-stat">
+                    <span class="sc-stat-value">1</span>
+                    <span class="sc-stat-label">Free Space</span>
+                </div>
+            </div>
         </div>
 
         <button
             hx-post="/start"
             hx-target="#game-container"
             hx-swap="outerHTML"
-            class="w-full bg-accent text-white font-semibold py-4 px-8 rounded-lg text-lg active:bg-accent-light transition-colors">
-            Start Game
+            class="sc-cta">
+            Start Night Run
         </button>
     </div>
 </div>
