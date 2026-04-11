@@ -1,0 +1,54 @@
+<div id="game-container">
+<div class="flex flex-col min-h-full bg-gray-50">
+    <!-- Header -->
+    <header class="flex items-center justify-between p-3 bg-white border-b border-gray-200">
+        <button
+            hx-post="/card-deck/reset"
+            hx-target="#game-container"
+            hx-swap="outerHTML"
+            class="text-gray-500 text-sm px-3 py-1.5 rounded active:bg-gray-100">
+            ← Back
+        </button>
+        <h1 class="font-bold text-gray-900">Card Deck</h1>
+        <span class="text-sm font-semibold text-gray-700 w-16 text-right">
+            {{ session.cards_remaining }} left
+        </span>
+    </header>
+
+    <!-- Card area -->
+    <div class="flex-1 flex flex-col items-center justify-center p-6">
+        {% if session.current_card %}
+        <div class="bg-white rounded-xl shadow-xl border border-gray-200 p-6 max-w-sm w-full mb-8">
+            <p class="text-center text-gray-900 text-lg font-semibold">
+                {{ session.current_card.text }}
+            </p>
+        </div>
+        {% else %}
+        <div class="bg-white rounded-xl shadow-xl border border-gray-200 p-6 max-w-sm w-full mb-8 flex items-center justify-center min-h-[160px]">
+            <p class="text-center text-gray-400 text-lg">🂠 Draw a card to begin</p>
+        </div>
+        {% endif %}
+
+        {% if session.cards_remaining > 0 %}
+        <button
+            hx-post="/card-deck/draw"
+            hx-target="#game-container"
+            hx-swap="outerHTML"
+            class="w-full max-w-sm bg-accent text-white font-semibold py-4 px-8 rounded-lg text-lg active:bg-accent-light transition-colors">
+            Draw a Card
+        </button>
+        {% else %}
+        <p class="text-gray-600 mb-4 text-center">All cards have been drawn!</p>
+        <button
+            hx-post="/card-deck/reset"
+            hx-target="#game-container"
+            hx-swap="outerHTML"
+            class="w-full max-w-sm bg-accent text-white font-semibold py-4 px-8 rounded-lg text-lg active:bg-accent-light transition-colors">
+            Reset Deck
+        </button>
+        {% endif %}
+
+        <p class="text-sm text-gray-500 mt-4">{{ session.cards_remaining }} cards remaining · {{ session.cards_drawn }} drawn</p>
+    </div>
+</div>
+</div>

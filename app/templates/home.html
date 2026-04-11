@@ -3,6 +3,10 @@
 {% block content %}
 {% if session.game_state == GameState.START %}
     {% include "components/start_screen.html" %}
+{% elif session.game_state == GameState.SCAVENGER_HUNT %}
+    {% include "components/scavenger_screen.html" %}
+{% elif session.game_state == GameState.CARD_DECK %}
+    {% include "components/card_deck_screen.html" %}
 {% else %}
     {% include "components/game_screen.html" %}
 {% endif %}
