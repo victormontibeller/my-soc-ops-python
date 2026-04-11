@@ -1,25 +1,58 @@
 <div id="game-container">
-<div class="flex flex-col items-center justify-center min-h-full p-6 bg-gray-50">
-    <div class="text-center max-w-sm">
-        <h1 class="text-4xl font-bold text-gray-900 mb-2">Soc Ops</h1>
-        <p class="text-lg text-gray-600 mb-8">Social Bingo</p>
+<div class="nac-bg">
+    <div class="nac-scanlines" aria-hidden="true"></div>
+    <div class="nac-grid" aria-hidden="true"></div>
 
-        <div class="bg-white rounded-lg p-6 shadow-sm border border-gray-200 mb-8">
-            <h2 class="font-semibold text-gray-800 mb-3">How to play</h2>
-            <ul class="text-left text-gray-600 text-sm space-y-2">
-                <li>• Find people who match the questions</li>
-                <li>• Tap a square when you find a match</li>
-                <li>• Get 5 in a row to win!</li>
-            </ul>
+    <div class="nac-content">
+
+        <div class="nac-hero reveal-1">
+            <div class="nac-badge">SOCIAL MISSION</div>
+            <h1 class="nac-title">
+                <span class="nac-title-soc">SOC</span>
+                <span class="nac-title-ops">OPS</span>
+            </h1>
+            <p class="nac-subtitle">SOCIAL BINGO PROTOCOL</p>
         </div>
 
-        <button
-            hx-post="/start"
-            hx-target="#game-container"
-            hx-swap="outerHTML"
-            class="w-full bg-accent text-white font-semibold py-4 px-8 rounded-lg text-lg active:bg-accent-light transition-colors">
-            Start Game
-        </button>
+        <div class="nac-brief reveal-2" role="region" aria-label="Mission briefing">
+            <div class="nac-brief-header">
+                <span class="nac-blink" aria-hidden="true">▸</span>
+                MISSION BRIEFING
+            </div>
+            <p class="nac-brief-text">
+                Navigate the room. Decode social signals.<br>
+                Connect the dots between strangers.<br>
+                Five in a row — and the field is yours.
+            </p>
+        </div>
+
+        <ol class="nac-instructions reveal-3" aria-label="How to play">
+            <li class="nac-inst-row">
+                <span class="nac-inst-key" aria-hidden="true">01</span>
+                <span class="nac-inst-text">Scan the crowd for matching profiles</span>
+            </li>
+            <li class="nac-inst-row">
+                <span class="nac-inst-key" aria-hidden="true">02</span>
+                <span class="nac-inst-text">Tap the square to confirm your intel</span>
+            </li>
+            <li class="nac-inst-row">
+                <span class="nac-inst-key" aria-hidden="true">03</span>
+                <span class="nac-inst-text">Link 5 in a row — mission complete</span>
+            </li>
+        </ol>
+
+        <div class="nac-cta reveal-4">
+            <button
+                hx-post="/start"
+                hx-target="#game-container"
+                hx-swap="outerHTML"
+                class="nac-start-btn"
+                aria-label="Start the Social Bingo mission">
+                <span class="nac-btn-text">START MISSION</span>
+                <span class="nac-btn-shimmer" aria-hidden="true"></span>
+            </button>
+        </div>
+
     </div>
 </div>
 </div>
