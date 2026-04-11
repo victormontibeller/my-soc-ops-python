@@ -1,25 +1,64 @@
 <div id="game-container">
-<div class="flex flex-col items-center justify-center min-h-full p-6 bg-gray-50">
-    <div class="text-center max-w-sm">
-        <h1 class="text-4xl font-bold text-gray-900 mb-2">Soc Ops</h1>
-        <p class="text-lg text-gray-600 mb-8">Social Bingo</p>
+<div class="ops-landing">
 
-        <div class="bg-white rounded-lg p-6 shadow-sm border border-gray-200 mb-8">
-            <h2 class="font-semibold text-gray-800 mb-3">How to play</h2>
-            <ul class="text-left text-gray-600 text-sm space-y-2">
-                <li>• Find people who match the questions</li>
-                <li>• Tap a square when you find a match</li>
-                <li>• Get 5 in a row to win!</li>
-            </ul>
+    <!-- Scanline texture overlay -->
+    <div class="ops-scanlines" aria-hidden="true"></div>
+
+    <!-- ── Hero ─────────────────────────────────────────────── -->
+    <header class="ops-hero">
+        <span class="ops-badge">Event Ops</span>
+        <h1 class="ops-title">Soc Ops</h1>
+        <p class="ops-subtitle">Social Bingo · Mission Briefing</p>
+    </header>
+
+    <!-- ── Mission Checklist (How to play) ───────────────────── -->
+    <section class="ops-section">
+        <h2 class="ops-section-label">How to play</h2>
+        <ul class="ops-checklist">
+            <li class="ops-check-item">
+                <span class="ops-check-icon">01</span>
+                <span>Find people who match the questions</span>
+            </li>
+            <li class="ops-check-item">
+                <span class="ops-check-icon">02</span>
+                <span>Tap a square when you find a match</span>
+            </li>
+            <li class="ops-check-item ops-check-item--win">
+                <span class="ops-check-icon">03</span>
+                <span>Get 5 in a row to win!</span>
+            </li>
+        </ul>
+    </section>
+
+    <!-- ── Quick Facts / Objectives ──────────────────────────── -->
+    <section class="ops-section">
+        <h2 class="ops-section-label">Objectives</h2>
+        <div class="ops-facts-grid">
+            <div class="ops-fact-card">
+                <span class="ops-fact-value">5×5</span>
+                <span class="ops-fact-label">Grid Size</span>
+            </div>
+            <div class="ops-fact-card">
+                <span class="ops-fact-value">24</span>
+                <span class="ops-fact-label">Questions</span>
+            </div>
+            <div class="ops-fact-card ops-fact-card--win">
+                <span class="ops-fact-value">BINGO</span>
+                <span class="ops-fact-label">5 in a row</span>
+            </div>
         </div>
+    </section>
 
+    <!-- ── Primary CTA ───────────────────────────────────────── -->
+    <div class="ops-cta">
         <button
             hx-post="/start"
             hx-target="#game-container"
             hx-swap="outerHTML"
-            class="w-full bg-accent text-white font-semibold py-4 px-8 rounded-lg text-lg active:bg-accent-light transition-colors">
+            class="ops-start-btn">
             Start Game
         </button>
     </div>
+
 </div>
 </div>
