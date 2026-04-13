@@ -182,9 +182,287 @@ button:disabled {
     min-height: 60px;
 }
 
-.min-h-\[160px\] {
-    min-height: 160px;
+/* ============================================================
+   NEON ARCADE CINEMATIC — Start Screen (Design Variation B)
+   ============================================================ */
+
+/* Background: deep dark with layered neon radial atmosphere */
+.nac-bg {
+    position: relative;
+    min-height: 100%;
+    background-color: #030712;
+    background-image:
+        radial-gradient(ellipse 80% 50% at 50% 0%,   rgba(0, 255, 200, 0.13) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 85% 100%, rgba(255, 0, 200, 0.11) 0%, transparent 55%),
+        radial-gradient(ellipse 50% 35% at 5%  60%,  rgba(80, 80, 255, 0.07) 0%, transparent 55%);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1.25rem;
 }
+
+/* CRT scanlines for retro arcade texture */
+.nac-scanlines {
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 0, 0, 0.18) 2px,
+        rgba(0, 0, 0, 0.18) 4px
+    );
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Subtle perspective grid */
+.nac-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(0, 255, 200, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 200, 0.035) 1px, transparent 1px);
+    background-size: 44px 44px;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Main content column */
+.nac-content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 22rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Hero block */
+.nac-hero {
+    text-align: center;
+}
+
+.nac-badge {
+    display: inline-block;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.28em;
+    color: #00ffc8;
+    border: 1px solid rgba(0, 255, 200, 0.6);
+    padding: 0.2rem 0.8rem;
+    border-radius: 2px;
+    margin-bottom: 1rem;
+    opacity: 0.9;
+}
+
+.nac-title {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: clamp(4.5rem, 20vw, 7.5rem);
+    font-weight: 900;
+    line-height: 0.85;
+    letter-spacing: -0.02em;
+    margin: 0 0 0.8rem;
+}
+
+.nac-title-soc {
+    display: block;
+    color: #00ffc8;
+    text-shadow:
+        0 0 8px  rgba(0, 255, 200, 0.9),
+        0 0 24px rgba(0, 255, 200, 0.5),
+        0 0 56px rgba(0, 200, 255, 0.25);
+}
+
+.nac-title-ops {
+    display: block;
+    color: #ff00d4;
+    text-shadow:
+        0 0 8px  rgba(255, 0, 212, 0.9),
+        0 0 24px rgba(255, 0, 212, 0.5),
+        0 0 56px rgba(200, 0, 255, 0.25);
+}
+
+.nac-subtitle {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.32em;
+    color: rgba(255, 255, 255, 0.45);
+    margin: 0;
+}
+
+/* Mission briefing narrative block */
+.nac-brief {
+    border-left: 2px solid #00ffc8;
+    padding: 0.75rem 1rem;
+    background: rgba(0, 255, 200, 0.04);
+}
+
+.nac-brief-header {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.22em;
+    color: #00ffc8;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.nac-brief-text {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.78rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.62);
+    margin: 0;
+}
+
+/* Instructions list */
+.nac-instructions {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.nac-inst-row {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    padding: 0.55rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.nac-inst-key {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.65rem;
+    color: #ff00d4;
+    font-weight: 700;
+    min-width: 1.6rem;
+    flex-shrink: 0;
+    letter-spacing: 0.05em;
+}
+
+.nac-inst-text {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.78rem;
+    color: rgba(255, 255, 255, 0.68);
+    line-height: 1.4;
+}
+
+/* CTA button */
+.nac-cta {
+    padding-top: 0.25rem;
+}
+
+.nac-start-btn {
+    position: relative;
+    width: 100%;
+    min-height: 56px;
+    padding: 1rem 2rem;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    color: #000000;
+    background: linear-gradient(135deg, #00ffc8 0%, #00c8ff 100%);
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    overflow: hidden;
+    box-shadow:
+        0 0 18px rgba(0, 255, 200, 0.45),
+        0 0 40px rgba(0, 255, 200, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.25);
+    transition: transform 0.12s ease, box-shadow 0.2s ease;
+}
+
+.nac-start-btn:active {
+    transform: scale(0.97);
+    box-shadow:
+        0 0 10px rgba(0, 255, 200, 0.3),
+        0 0 20px rgba(0, 255, 200, 0.1);
+}
+
+.nac-btn-text {
+    position: relative;
+    z-index: 1;
+}
+
+/* Shimmer sweep on the CTA */
+.nac-btn-shimmer {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        105deg,
+        transparent 35%,
+        rgba(255, 255, 255, 0.22) 50%,
+        transparent 65%
+    );
+    animation: nac-shimmer 2.8s ease-in-out infinite;
+}
+
+/* ---- Keyframes ---- */
+
+/* Staggered page-load reveal (translate + fade) */
+@keyframes nac-reveal {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* CTA button shimmer sweep */
+@keyframes nac-shimmer {
+    0%   { transform: translateX(-120%); }
+    60%  { transform: translateX(120%); }
+    100% { transform: translateX(120%); }
+}
+
+/* Blinking cursor on briefing header */
+@keyframes nac-blink {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0; }
+}
+
+.nac-blink {
+    animation: nac-blink 1s step-end infinite;
+}
+
+/* Stagger delays — each section fades in sequentially */
+.reveal-1 {
+    animation: nac-reveal 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: 0.05s;
+}
+.reveal-2 {
+    animation: nac-reveal 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: 0.22s;
+}
+.reveal-3 {
+    animation: nac-reveal 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: 0.38s;
+}
+.reveal-4 {
+    animation: nac-reveal 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: 0.54s;
+}
+
+/* ============================================================
+   END NEON ARCADE CINEMATIC
+   ============================================================ */
+
+/* ============================================================
+   GAME BOARD — existing animation (unrelated to neon arcade theme)
+   ============================================================ */
 
 @keyframes bounce {
     0%, 100% {
