@@ -1,0 +1,36 @@
+<div id="game-container">
+<div class="flex flex-col min-h-full bg-gray-50">
+    <!-- Header -->
+    <header class="flex items-center justify-between p-3 bg-white border-b border-gray-200">
+        <button
+            hx-post="/scavenger/reset"
+            hx-target="#game-container"
+            hx-swap="outerHTML"
+            class="text-gray-500 text-sm px-3 py-1.5 rounded active:bg-gray-100">
+            ← Back
+        </button>
+        <h1 class="font-bold text-gray-900">Scavenger Hunt</h1>
+        <span class="text-sm font-semibold text-gray-700 w-16 text-right">
+            {{ session.scavenger_progress[0] }} / {{ session.scavenger_progress[1] }}
+        </span>
+    </header>
+
+    <!-- Checklist -->
+    <div class="flex-1 overflow-y-auto">
+        <ul class="flex flex-col">
+            {% for item in session.scavenger_items %}
+            <li class="border-b border-gray-200">
+                <button
+                    hx-post="/scavenger/toggle/{{ item.id }}"
+                    hx-target="#game-container"
+                    hx-swap="outerHTML"
+                    class="w-full text-left py-3 px-4 flex items-center {% if item.is_checked %}text-green-800 bg-amber-100{% else %}text-gray-800 bg-white{% endif %}">
+                    <span class="mr-3">{% if item.is_checked %}✓{% else %}○{% endif %}</span>
+                    <span>{{ item.text }}</span>
+                </button>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+</div>

@@ -36,8 +36,20 @@
             class="w-full bg-accent text-white font-semibold py-4 px-8 rounded-lg text-lg active:bg-accent-light transition-colors start-cta">
             Start Night Run
         </button>
-
-        <p class="start-footnote text-sm text-gray-500">No page reloads. Pure HTMX flow.</p>
+        <button
+            hx-post="/start-scavenger"
+            hx-target="#game-container"
+            hx-swap="outerHTML"
+            class="mt-2 w-full bg-accent text-white font-semibold py-4 px-8 rounded-lg text-lg active:bg-accent-light transition-colors">
+            Scavenger Hunt
+        </button>
+        <button
+            hx-post="/start-card-deck"
+            hx-target="#game-container"
+            hx-swap="outerHTML"
+            class="mt-2 w-full bg-accent text-white font-semibold py-4 px-8 rounded-lg text-lg active:bg-accent-light transition-colors">
+            Card Deck
+        </button>
     </div>
 </div>
 </div>

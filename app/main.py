@@ -98,6 +98,60 @@ async def dismiss_modal(request: Request) -> Response:
     )
 
 
+@app.post("/start-scavenger", response_class=HTMLResponse)
+async def start_scavenger(request: Request) -> Response:
+    session = _get_game_session(request)
+    session.start_scavenger_hunt()
+    return templates.TemplateResponse(
+        request, "components/scavenger_screen.html", {"session": session}
+    )
+
+
+@app.post("/scavenger/toggle/{item_id}", response_class=HTMLResponse)
+async def toggle_scavenger(request: Request, item_id: int) -> Response:
+    session = _get_game_session(request)
+    session.handle_scavenger_item_click(item_id)
+    return templates.TemplateResponse(
+        request, "components/scavenger_screen.html", {"session": session}
+    )
+
+
+@app.post("/scavenger/reset", response_class=HTMLResponse)
+async def reset_scavenger(request: Request) -> Response:
+    session = _get_game_session(request)
+    session.reset_game()
+    return templates.TemplateResponse(
+        request, "components/start_screen.html", {"session": session, "GameState": GameState}
+    )
+
+
+@app.post("/start-card-deck", response_class=HTMLResponse)
+async def start_card_deck(request: Request) -> Response:
+    session = _get_game_session(request)
+    session.start_card_deck()
+    return templates.TemplateResponse(
+        request, "components/card_deck_screen.html", {"session": session}
+    )
+
+
+@app.post("/card-deck/draw", response_class=HTMLResponse)
+async def draw_card_route(request: Request) -> Response:
+    session = _get_game_session(request)
+    session.draw_next_card()
+    return templates.TemplateResponse(
+        request, "components/card_deck_screen.html", {"session": session}
+    )
+
+
+@app.post("/card-deck/reset", response_class=HTMLResponse)
+async def reset_card_deck(request: Request) -> Response:
+    session = _get_game_session(request)
+    session.reset_game()
+    return templates.TemplateResponse(
+        request, "components/start_screen.html", {"session": session, "GameState": GameState}
+    )
+
+
 def run() -> None:
     """Entry point for the application."""
     import uvicorn
