@@ -1,55 +1,64 @@
 <div id="game-container">
-<div class="start-shell flex flex-col items-center justify-center min-h-full p-6 bg-gray-50">
-    <div class="start-content text-center">
-        <div class="start-badge-row">
-            <span class="start-dot">*</span>
-            <p class="text-xs text-green-600">NIGHT MODE ONLINE</p>
+<div class="ops-landing">
+
+    <!-- Scanline texture overlay -->
+    <div class="ops-scanlines" aria-hidden="true"></div>
+
+    <!-- ── Hero ─────────────────────────────────────────────── -->
+    <header class="ops-hero">
+        <span class="ops-badge">Event Ops</span>
+        <h1 class="ops-title">Soc Ops</h1>
+        <p class="ops-subtitle">Social Bingo · Mission Briefing</p>
+    </header>
+
+    <!-- ── Mission Checklist (How to play) ───────────────────── -->
+    <section class="ops-section">
+        <h2 class="ops-section-label">How to play</h2>
+        <ul class="ops-checklist">
+            <li class="ops-check-item">
+                <span class="ops-check-icon">01</span>
+                <span>Find people who match the questions</span>
+            </li>
+            <li class="ops-check-item">
+                <span class="ops-check-icon">02</span>
+                <span>Tap a square when you find a match</span>
+            </li>
+            <li class="ops-check-item ops-check-item--win">
+                <span class="ops-check-icon">03</span>
+                <span>Get 5 in a row to win!</span>
+            </li>
+        </ul>
+    </section>
+
+    <!-- ── Quick Facts / Objectives ──────────────────────────── -->
+    <section class="ops-section">
+        <h2 class="ops-section-label">Objectives</h2>
+        <div class="ops-facts-grid">
+            <div class="ops-fact-card">
+                <span class="ops-fact-value">5×5</span>
+                <span class="ops-fact-label">Grid Size</span>
+            </div>
+            <div class="ops-fact-card">
+                <span class="ops-fact-value">24</span>
+                <span class="ops-fact-label">Questions</span>
+            </div>
+            <div class="ops-fact-card ops-fact-card--win">
+                <span class="ops-fact-value">BINGO</span>
+                <span class="ops-fact-label">5 in a row</span>
+            </div>
         </div>
+    </section>
 
-        <h1 class="start-title">Soc Ops</h1>
-        <p class="start-subtitle">Neon Social Bingo for real-world networking missions.</p>
-
-        <div class="start-grid">
-            <section class="start-card bg-white rounded-lg p-6 shadow-sm border border-gray-200">
-                <h2 class="font-semibold text-gray-800 mb-3">Mission Briefing</h2>
-                <ul class="text-left text-gray-600 text-sm space-y-2">
-                    <li>- Scan the room for people matching each prompt</li>
-                    <li>- Tap each square as soon as you lock a match</li>
-                    <li>- Build a row, column, or diagonal to trigger BINGO</li>
-                </ul>
-            </section>
-
-            <section class="start-card bg-white rounded-lg p-6 shadow-sm border border-gray-200">
-                <h2 class="font-semibold text-gray-800 mb-3">Live Objectives</h2>
-                <ul class="text-left text-gray-600 text-sm space-y-2">
-                    <li>- 5x5 tactical board</li>
-                    <li>- Center square is a free lock</li>
-                    <li>- Instant win detection with modal alert</li>
-                </ul>
-            </section>
-        </div>
-
+    <!-- ── Primary CTA ───────────────────────────────────────── -->
+    <div class="ops-cta">
         <button
             hx-post="/start"
             hx-target="#game-container"
             hx-swap="outerHTML"
-            class="w-full bg-accent text-white font-semibold py-4 px-8 rounded-lg text-lg active:bg-accent-light transition-colors start-cta">
-            Start Night Run
-        </button>
-        <button
-            hx-post="/start-scavenger"
-            hx-target="#game-container"
-            hx-swap="outerHTML"
-            class="mt-2 w-full bg-accent text-white font-semibold py-4 px-8 rounded-lg text-lg active:bg-accent-light transition-colors">
-            Scavenger Hunt
-        </button>
-        <button
-            hx-post="/start-card-deck"
-            hx-target="#game-container"
-            hx-swap="outerHTML"
-            class="mt-2 w-full bg-accent text-white font-semibold py-4 px-8 rounded-lg text-lg active:bg-accent-light transition-colors">
-            Card Deck
+            class="ops-start-btn">
+            Start Game
         </button>
     </div>
+
 </div>
 </div>
