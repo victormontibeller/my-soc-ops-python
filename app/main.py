@@ -1,11 +1,35 @@
+import os
+import subprocess
+import sys
 import uuid
 from pathlib import Path
 
-from fastapi import FastAPI, Request, Response
-from fastapi.responses import HTMLResponse
-from fastapi.staticfiles import StaticFiles
-from fastapi.templating import Jinja2Templates
-from starlette.middleware.sessions import SessionMiddleware
+# Allow direct execution (e.g. VS Code Play on this file) by exposing project root.
+if __package__ in (None, ""):
+    sys.path.append(str(Path(__file__).resolve().parent.parent))
+
+try:
+    from fastapi import FastAPI, Request, Response
+    from fastapi.responses import HTMLResponse
+    from fastapi.staticfiles import StaticFiles
+    from fastapi.templating import Jinja2Templates
+    from starlette.middleware.sessions import SessionMiddleware
+except ModuleNotFoundError as exc:
+    if (
+        exc.name in {"fastapi", "starlette"}
+        and os.environ.get("SOC_OPS_BOOTSTRAPPED") != "1"
+    ):
+        project_root = Path(__file__).resolve().parent.parent
+        env = os.environ.copy()
+        env["SOC_OPS_BOOTSTRAPPED"] = "1"
+        raise SystemExit(
+            subprocess.call(
+                ["uv", "run", "python", "app/main.py"],
+                cwd=project_root,
+                env=env,
+            )
+        ) from exc
+    raise
 
 from app.game_service import GameSession, get_session
 from app.models import GameState
@@ -74,8 +98,66 @@ async def dismiss_modal(request: Request) -> Response:
     )
 
 
+@app.post("/start-scavenger", response_class=HTMLResponse)
+async def start_scavenger(request: Request) -> Response:
+    session = _get_game_session(request)
+    session.start_scavenger_hunt()
+    return templates.TemplateResponse(
+        request, "components/scavenger_screen.html", {"session": session}
+    )
+
+
+@app.post("/scavenger/toggle/{item_id}", response_class=HTMLResponse)
+async def toggle_scavenger(request: Request, item_id: int) -> Response:
+    session = _get_game_session(request)
+    session.handle_scavenger_item_click(item_id)
+    return templates.TemplateResponse(
+        request, "components/scavenger_screen.html", {"session": session}
+    )
+
+
+@app.post("/scavenger/reset", response_class=HTMLResponse)
+async def reset_scavenger(request: Request) -> Response:
+    session = _get_game_session(request)
+    session.reset_game()
+    return templates.TemplateResponse(
+        request, "components/start_screen.html", {"session": session, "GameState": GameState}
+    )
+
+
+@app.post("/start-card-deck", response_class=HTMLResponse)
+async def start_card_deck(request: Request) -> Response:
+    session = _get_game_session(request)
+    session.start_card_deck()
+    return templates.TemplateResponse(
+        request, "components/card_deck_screen.html", {"session": session}
+    )
+
+
+@app.post("/card-deck/draw", response_class=HTMLResponse)
+async def draw_card_route(request: Request) -> Response:
+    session = _get_game_session(request)
+    session.draw_next_card()
+    return templates.TemplateResponse(
+        request, "components/card_deck_screen.html", {"session": session}
+    )
+
+
+@app.post("/card-deck/reset", response_class=HTMLResponse)
+async def reset_card_deck(request: Request) -> Response:
+    session = _get_game_session(request)
+    session.reset_game()
+    return templates.TemplateResponse(
+        request, "components/start_screen.html", {"session": session, "GameState": GameState}
+    )
+
+
 def run() -> None:
     """Entry point for the application."""
     import uvicorn
 
     uvicorn.run("app.main:app", host="0.0.0.0", port=8000, reload=True)
+
+
+if __name__ == "__main__":
+    run()

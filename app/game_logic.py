@@ -2,7 +2,7 @@ import functools
 import random
 
 from app.data import FREE_SPACE, QUESTIONS
-from app.models import BingoLine, BingoSquareData
+from app.models import BingoLine, BingoSquareData, CardDeckItem, ScavengerItem
 
 BOARD_SIZE = 5
 CENTER_INDEX = 12  # 5x5 grid, center is index 12 (row 2, col 2)
@@ -67,3 +67,34 @@ def check_bingo(board: list[BingoSquareData]) -> BingoLine | None:
 def get_winning_square_ids(line: BingoLine | None) -> set[int]:
     """Get the square IDs that are part of a winning line."""
     return set(line.squares) if line else set()
+
+
+def generate_scavenger_list() -> list[ScavengerItem]:
+    """Returns all 24 questions as ScavengerItems with sequential IDs."""
+    return [ScavengerItem(id=i, text=text) for i, text in enumerate(QUESTIONS[:24])]
+
+
+def toggle_scavenger_item(items: list[ScavengerItem], item_id: int) -> list[ScavengerItem]:
+    """Toggles is_checked for the item matching item_id. Returns new list."""
+    return [
+        item.model_copy(update={"is_checked": not item.is_checked})
+        if item.id == item_id
+        else item
+        for item in items
+    ]
+
+
+def get_scavenger_progress(items: list[ScavengerItem]) -> tuple[int, int]:
+    """Returns (checked_count, total_count)."""
+    return sum(1 for item in items if item.is_checked), len(items)
+
+
+def generate_card_deck() -> list[CardDeckItem]:
+    """Returns a shuffled list of 24 questions as CardDeckItems."""
+    questions = random.sample(QUESTIONS, 24)
+    return [CardDeckItem(id=i, text=text) for i, text in enumerate(questions)]
+
+
+def draw_card(deck: list[CardDeckItem]) -> tuple[CardDeckItem, list[CardDeckItem]]:
+    """Pops the first card and returns (card, remaining_deck)."""
+    return deck[0], deck[1:]
