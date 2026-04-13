@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@500;700&display=swap');
+
 html,
 body,
 #app {
@@ -479,269 +481,249 @@ button:disabled {
     animation: bounce 0.5s ease-out;
 }
 
-/* ============================================================
-   Event Ops Dashboard — Start Screen (Design Variation C)
-   ============================================================ */
+/* ===== Tactical Command Center — Start Screen ===== */
 
 :root {
-    --ops-bg:         #080c14;
-    --ops-surface:    #0d1520;
-    --ops-surface-hi: #111e2e;
-    --ops-border:     #1a3a5c;
-    --ops-cyan:       #00e5ff;
-    --ops-green:      #39ff14;
-    --ops-muted:      #4a7a9b;
-    --ops-text:       #cde4f5;
-    --ops-dim:        #3d6680;
+    --sc-bg: #07090f;
+    --sc-surface: #0d1526;
+    --sc-border: #1c2f52;
+    --sc-accent: #00d4aa;
+    --sc-accent-dim: rgba(0, 212, 170, 0.12);
+    --sc-accent-glow: 0 0 22px rgba(0, 212, 170, 0.28);
+    --sc-text: #dde7f5;
+    --sc-text-muted: #5d7799;
+    --sc-text-dim: #8fa4c0;
+    --sc-status-green: #4ade80;
+    --sc-mono: 'Share Tech Mono', 'Courier New', monospace;
+    --sc-display: 'Rajdhani', 'Trebuchet MS', 'Franklin Gothic Medium', sans-serif;
 }
 
-.ops-landing {
-    position: relative;
+.sc-root {
     min-height: 100%;
-    background-color: var(--ops-bg);
+    background-color: var(--sc-bg);
     background-image:
-        radial-gradient(ellipse 80% 45% at 50% -5%, rgba(0, 229, 255, 0.08) 0%, transparent 65%),
-        linear-gradient(180deg, rgba(0, 229, 255, 0.02) 0%, transparent 35%);
+        radial-gradient(ellipse at 50% 0%, rgba(0, 212, 170, 0.07) 0%, transparent 55%),
+        linear-gradient(180deg, #070d1a 0%, #07090f 100%);
     display: flex;
     flex-direction: column;
-    padding: 1.5rem 1rem 2rem;
-    box-sizing: border-box;
-    overflow-x: hidden;
-    gap: 1.75rem;
-    max-width: 38rem;
-    margin: 0 auto;
-}
-
-/* Fixed scanline texture */
-.ops-scanlines {
-    pointer-events: none;
-    position: fixed;
-    inset: 0;
-    background: repeating-linear-gradient(
-        0deg,
-        transparent,
-        transparent 2px,
-        rgba(0, 0, 0, 0.12) 2px,
-        rgba(0, 0, 0, 0.12) 4px
-    );
-    z-index: 1;
-}
-
-.ops-landing > * {
-    position: relative;
-    z-index: 2;
-}
-
-/* ── Hero ─────────────────────────────────────────────── */
-
-.ops-badge {
-    display: inline-flex;
     align-items: center;
-    gap: 0.4rem;
-    font-size: 0.625rem;
-    font-weight: 700;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--ops-cyan);
-    border: 1px solid rgba(0, 229, 255, 0.3);
-    border-radius: 3px;
-    padding: 0.2rem 0.65rem;
-    margin-bottom: 0.75rem;
+    padding: 0 1rem 3rem;
+    overflow-x: hidden;
 }
 
-.ops-badge::before {
-    content: "";
-    display: inline-block;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--ops-cyan);
-    box-shadow: 0 0 6px var(--ops-cyan);
-    animation: ops-pulse 2.4s ease-in-out infinite;
-}
-
-.ops-hero {
-    padding-top: 0.75rem;
-}
-
-.ops-title {
-    font-size: clamp(2.25rem, 8vw, 3rem);
-    font-weight: 900;
-    line-height: 1;
-    letter-spacing: -0.025em;
-    color: #ffffff;
-    margin: 0 0 0.3rem;
-    text-shadow: 0 0 28px rgba(0, 229, 255, 0.25);
-}
-
-.ops-subtitle {
-    font-size: 0.8rem;
-    letter-spacing: 0.06em;
-    color: var(--ops-muted);
-    margin: 0;
-}
-
-/* ── Section wrapper ──────────────────────────────────── */
-
-.ops-section {
-    display: flex;
-    flex-direction: column;
-}
-
-.ops-section-label {
-    font-size: 0.6rem;
-    font-weight: 700;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--ops-dim);
-    margin: 0 0 0.65rem;
+.sc-status-bar {
+    width: 100%;
+    max-width: 38rem;
     display: flex;
     align-items: center;
     gap: 0.6rem;
+    padding: 0.8rem 0;
+    font-family: var(--sc-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    color: var(--sc-text-muted);
+    border-bottom: 1px solid var(--sc-border);
+    margin-bottom: 2.25rem;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
-.ops-section-label::after {
-    content: "";
-    flex: 1;
-    height: 1px;
-    background: linear-gradient(90deg, var(--ops-border) 0%, transparent 100%);
+.sc-status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--sc-status-green);
+    box-shadow: 0 0 6px var(--sc-status-green);
+    flex-shrink: 0;
+    animation: sc-pulse 2.5s ease-in-out infinite;
 }
 
-/* ── Mission checklist ───────────────────────────────── */
+.sc-status-sep {
+    color: var(--sc-border);
+}
 
-.ops-checklist {
+.sc-content {
+    width: 100%;
+    max-width: 38rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    animation: sc-fadein 0.55s ease-out both;
+}
+
+.sc-hero {
+    text-align: center;
+    padding: 1.25rem 0 1rem;
+}
+
+.sc-eyebrow {
+    font-family: var(--sc-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--sc-accent);
+    margin: 0 0 0.8rem;
+}
+
+.sc-title {
+    font-family: var(--sc-display);
+    font-size: clamp(3.5rem, 14vw, 5.5rem);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--sc-text);
+    margin: 0 0 0.8rem;
+    text-shadow: 0 0 50px rgba(0, 212, 170, 0.18);
+}
+
+.sc-tagline {
+    font-family: var(--sc-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    color: var(--sc-text-dim);
+    margin: 0;
+}
+
+.sc-panel {
+    background-color: var(--sc-surface);
+    border: 1px solid var(--sc-border);
+    border-radius: 0.5rem;
+    padding: 1.25rem 1.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.sc-panel::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--sc-accent), transparent);
+    opacity: 0.5;
+}
+
+.sc-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.sc-panel-label {
+    font-family: var(--sc-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--sc-accent);
+}
+
+.sc-panel-badge {
+    font-family: var(--sc-mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.1em;
+    color: var(--sc-text-muted);
+    background: var(--sc-accent-dim);
+    border: 1px solid rgba(0, 212, 170, 0.18);
+    border-radius: 0.2rem;
+    padding: 0.18rem 0.5rem;
+    white-space: nowrap;
+}
+
+.sc-mission-steps {
     list-style: none;
     margin: 0;
     padding: 0;
     display: flex;
     flex-direction: column;
-    gap: 0.45rem;
+    gap: 0.8rem;
 }
 
-.ops-check-item {
+.sc-step {
     display: flex;
-    align-items: flex-start;
-    gap: 0.75rem;
-    background: var(--ops-surface);
-    border: 1px solid var(--ops-border);
-    border-left: 3px solid var(--ops-cyan);
-    border-radius: 4px;
-    padding: 0.7rem 0.85rem;
+    align-items: baseline;
+    gap: 0.8rem;
     font-size: 0.875rem;
-    color: var(--ops-text);
-    animation: ops-slide-in 0.4s ease both;
+    color: var(--sc-text-dim);
+    line-height: 1.55;
 }
 
-.ops-check-item:nth-child(1) { animation-delay: 0.05s; }
-.ops-check-item:nth-child(2) { animation-delay: 0.12s; }
-.ops-check-item:nth-child(3) { animation-delay: 0.19s; }
-
-.ops-check-item--win {
-    border-left-color: var(--ops-green);
-}
-
-.ops-check-icon {
+.sc-step-num {
+    font-family: var(--sc-mono);
+    font-size: 0.65rem;
+    color: var(--sc-accent);
     flex-shrink: 0;
-    font-size: 0.6rem;
-    font-weight: 800;
-    letter-spacing: 0.06em;
-    color: var(--ops-cyan);
-    padding-top: 0.15rem;
-    min-width: 1.4rem;
+    width: 1.4rem;
 }
 
-.ops-check-item--win .ops-check-icon {
-    color: var(--ops-green);
+.sc-ops {
+    padding: 1rem 1.5rem;
 }
 
-/* ── Quick facts grid ────────────────────────────────── */
-
-.ops-facts-grid {
+.sc-ops-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    text-align: center;
     gap: 0.5rem;
 }
 
-.ops-fact-card {
-    background: var(--ops-surface);
-    border: 1px solid var(--ops-border);
-    border-radius: 6px;
-    padding: 0.85rem 0.5rem;
+.sc-stat {
     display: flex;
     flex-direction: column;
-    align-items: center;
     gap: 0.25rem;
-    text-align: center;
 }
 
-.ops-fact-card--win {
-    border-color: rgba(57, 255, 20, 0.35);
-    background: rgba(57, 255, 20, 0.04);
-}
-
-.ops-fact-value {
-    font-size: 1.2rem;
-    font-weight: 800;
-    color: #ffffff;
-    letter-spacing: -0.01em;
+.sc-stat-value {
+    font-family: var(--sc-display);
+    font-size: 1.625rem;
+    font-weight: 700;
+    color: var(--sc-text);
     line-height: 1;
 }
 
-.ops-fact-card--win .ops-fact-value {
-    color: var(--ops-green);
-    text-shadow: 0 0 10px rgba(57, 255, 20, 0.45);
-}
-
-.ops-fact-label {
-    font-size: 0.55rem;
-    font-weight: 700;
-    letter-spacing: 0.14em;
+.sc-stat-label {
+    font-family: var(--sc-mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--ops-dim);
+    color: var(--sc-text-muted);
 }
 
-/* ── Primary CTA ─────────────────────────────────────── */
-
-.ops-cta {
-    margin-top: auto;
-    padding-top: 0.25rem;
-}
-
-.ops-start-btn {
-    width: 100%;
-    padding: 1rem 1.5rem;
-    background: var(--ops-cyan);
-    color: var(--ops-bg);
-    font-size: 0.95rem;
-    font-weight: 800;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    border: none;
-    border-radius: 6px;
+.sc-cta {
     cursor: pointer;
-    transition: box-shadow 0.15s, transform 0.1s;
-    box-shadow: 0 0 22px rgba(0, 229, 255, 0.28);
+    border: 1px solid var(--sc-accent);
+    background: var(--sc-accent-dim);
+    color: var(--sc-accent);
+    font-family: var(--sc-mono);
+    font-size: 0.825rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 1.1rem 2rem;
+    border-radius: 0.375rem;
+    width: 100%;
+    transition: background-color 0.18s ease, box-shadow 0.18s ease, color 0.18s ease;
+    margin-top: 0.5rem;
 }
 
-.ops-start-btn:active {
-    transform: scale(0.98);
-    box-shadow: 0 0 8px rgba(0, 229, 255, 0.15);
+.sc-cta:hover {
+    background: var(--sc-accent);
+    color: var(--sc-bg);
+    box-shadow: var(--sc-accent-glow);
 }
 
-/* ── Keyframes ───────────────────────────────────────── */
+.sc-cta:active {
+    opacity: 0.88;
+    transform: scale(0.99);
+}
 
-@keyframes ops-pulse {
+@keyframes sc-pulse {
     0%, 100% { opacity: 1; }
-    50%       { opacity: 0.25; }
+    50% { opacity: 0.35; }
 }
 
-@keyframes ops-slide-in {
-    from {
-        opacity: 0;
-        transform: translateX(-10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
+@keyframes sc-fadein {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
 }

@@ -1,59 +1,66 @@
 <div id="game-container">
-<div class="nac-bg">
-    <div class="nac-scanlines" aria-hidden="true"></div>
-    <div class="nac-grid" aria-hidden="true"></div>
+<div class="sc-root">
+    <div class="sc-status-bar">
+        <span class="sc-status-dot"></span>
+        <span>SYSTEM READY</span>
+        <span class="sc-status-sep">|</span>
+        <span>NETWORK SECURE</span>
+        <span class="sc-status-sep">|</span>
+        <span>ALPHA CLEARANCE</span>
+    </div>
 
-    <div class="nac-content">
-
-        <div class="nac-hero reveal-1">
-            <div class="nac-badge">SOCIAL MISSION</div>
-            <h1 class="nac-title">
-                <span class="nac-title-soc">SOC</span>
-                <span class="nac-title-ops">OPS</span>
-            </h1>
-            <p class="nac-subtitle">SOCIAL BINGO PROTOCOL</p>
+    <div class="sc-content">
+        <div class="sc-hero">
+            <p class="sc-eyebrow">Tactical Social Network</p>
+            <h1 class="sc-title">Soc Ops</h1>
+            <p class="sc-tagline">Night Run Protocol &mdash; Active</p>
         </div>
 
-        <div class="nac-brief reveal-2" role="region" aria-label="Mission briefing">
-            <div class="nac-brief-header">
-                <span class="nac-blink" aria-hidden="true">▸</span>
-                MISSION BRIEFING
+        <div class="sc-panel sc-briefing">
+            <div class="sc-panel-header">
+                <span class="sc-panel-label">Mission Briefing</span>
+                <span class="sc-panel-badge">PRIORITY: HIGH</span>
             </div>
-            <p class="nac-brief-text">
-                Navigate the room. Decode social signals.<br>
-                Connect the dots between strangers.<br>
-                Five in a row — and the field is yours.
-            </p>
+            <ul class="sc-mission-steps">
+                <li class="sc-step">
+                    <span class="sc-step-num">01</span>
+                    <span>Identify targets who match the profile cards in your tactical grid</span>
+                </li>
+                <li class="sc-step">
+                    <span class="sc-step-num">02</span>
+                    <span>Tap a node to mark each confirmed contact on your grid</span>
+                </li>
+                <li class="sc-step">
+                    <span class="sc-step-num">03</span>
+                    <span>Secure 5 in a row to complete the mission</span>
+                </li>
+            </ul>
         </div>
 
-        <ol class="nac-instructions reveal-3" aria-label="How to play">
-            <li class="nac-inst-row">
-                <span class="nac-inst-key" aria-hidden="true">01</span>
-                <span class="nac-inst-text">Scan the crowd for matching profiles</span>
-            </li>
-            <li class="nac-inst-row">
-                <span class="nac-inst-key" aria-hidden="true">02</span>
-                <span class="nac-inst-text">Tap the square to confirm your intel</span>
-            </li>
-            <li class="nac-inst-row">
-                <span class="nac-inst-key" aria-hidden="true">03</span>
-                <span class="nac-inst-text">Link 5 in a row — mission complete</span>
-            </li>
-        </ol>
-
-        <div class="nac-cta reveal-4">
-            <button
-                hx-post="/start"
-                hx-target="#game-container"
-                hx-swap="outerHTML"
-                class="nac-start-btn"
-                aria-label="Start the Social Bingo mission">
-                <span class="nac-btn-text">START MISSION</span>
-                <span class="nac-btn-shimmer" aria-hidden="true"></span>
-            </button>
+        <div class="sc-panel sc-ops">
+            <div class="sc-ops-grid">
+                <div class="sc-stat">
+                    <span class="sc-stat-value">25</span>
+                    <span class="sc-stat-label">Grid Nodes</span>
+                </div>
+                <div class="sc-stat">
+                    <span class="sc-stat-value" aria-label="5 by 5">5×5</span>
+                    <span class="sc-stat-label">Tactical Matrix</span>
+                </div>
+                <div class="sc-stat">
+                    <span class="sc-stat-value">1</span>
+                    <span class="sc-stat-label">Free Space</span>
+                </div>
+            </div>
         </div>
-    </section>
 
+        <button
+            hx-post="/start"
+            hx-target="#game-container"
+            hx-swap="outerHTML"
+            class="sc-cta">
+            Start Night Run
+        </button>
     </div>
 
 </div>
