@@ -1,11 +1,35 @@
+import os
+import subprocess
+import sys
 import uuid
 from pathlib import Path
 
-from fastapi import FastAPI, Request, Response
-from fastapi.responses import HTMLResponse
-from fastapi.staticfiles import StaticFiles
-from fastapi.templating import Jinja2Templates
-from starlette.middleware.sessions import SessionMiddleware
+# Allow direct execution (e.g. VS Code Play on this file) by exposing project root.
+if __package__ in (None, ""):
+    sys.path.append(str(Path(__file__).resolve().parent.parent))
+
+try:
+    from fastapi import FastAPI, Request, Response
+    from fastapi.responses import HTMLResponse
+    from fastapi.staticfiles import StaticFiles
+    from fastapi.templating import Jinja2Templates
+    from starlette.middleware.sessions import SessionMiddleware
+except ModuleNotFoundError as exc:
+    if (
+        exc.name in {"fastapi", "starlette"}
+        and os.environ.get("SOC_OPS_BOOTSTRAPPED") != "1"
+    ):
+        project_root = Path(__file__).resolve().parent.parent
+        env = os.environ.copy()
+        env["SOC_OPS_BOOTSTRAPPED"] = "1"
+        raise SystemExit(
+            subprocess.call(
+                ["uv", "run", "python", "app/main.py"],
+                cwd=project_root,
+                env=env,
+            )
+        ) from exc
+    raise
 
 from app.game_service import GameSession, get_session
 from app.models import GameState
@@ -133,3 +157,7 @@ def run() -> None:
     import uvicorn
 
     uvicorn.run("app.main:app", host="0.0.0.0", port=8000, reload=True)
+
+
+if __name__ == "__main__":
+    run()
