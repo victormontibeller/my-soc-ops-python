@@ -8,6 +8,8 @@ class GameState(StrEnum):
     START = "start"
     PLAYING = "playing"
     BINGO = "bingo"
+    SCAVENGER_HUNT = "scavenger_hunt"
+    CARD_DECK = "card_deck"
 
 
 class BingoSquareData(BaseModel):
@@ -29,3 +31,22 @@ class BingoLine(BaseModel):
     type: Literal["row", "column", "diagonal"] = "row"
     index: int = 0
     squares: list[int] = []
+
+
+class CardDeckItem(BaseModel):
+    """A single card in the card deck, identified by an integer id and prompt text."""
+
+    model_config = ConfigDict(frozen=True)
+
+    id: int
+    text: str
+
+
+class ScavengerItem(BaseModel):
+    """A single item in the scavenger hunt list."""
+
+    model_config = ConfigDict(frozen=True)
+
+    id: int
+    text: str
+    is_checked: bool = False

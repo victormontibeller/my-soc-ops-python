@@ -7,21 +7,21 @@
             hx-target="#game-container"
             hx-swap="outerHTML"
             class="text-gray-500 text-sm px-3 py-1.5 rounded active:bg-gray-100">
-            ← Back
+            ← Exit Run
         </button>
         <h1 class="font-bold text-gray-900">Soc Ops</h1>
-        <div class="w-16"></div>
+        <div class="w-16 text-xs text-green-600">LIVE</div>
     </header>
 
     <!-- Instructions -->
     <p class="text-center text-gray-500 text-sm py-2 px-4">
-        Tap a square when you find someone who matches it.
+        Match prompts, tap squares, and complete a neon line.
     </p>
 
     <!-- Bingo indicator -->
     {% if session.has_bingo %}
     <div class="bg-amber-100 text-amber-800 text-center py-2 font-semibold text-sm">
-        🎉 BINGO! You got a line!
+        BINGO SIGNAL LOCKED. Line complete.
     </div>
     {% endif %}
 
